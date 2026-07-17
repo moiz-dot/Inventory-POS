@@ -113,7 +113,7 @@ const mobileNavItems = [
 </script>
 
 <template>
-    <div class="min-h-screen bg-slate-950 text-slate-100 flex font-sans select-none overflow-hidden">
+    <div class="min-h-screen h-screen bg-slate-950 text-slate-100 flex font-sans select-none overflow-hidden">
         <Head :title="title" />
         <Banner />
 
@@ -122,11 +122,11 @@ const mobileNavItems = [
 
         <!-- LEFT SIDEBAR NAVIGATION -->
         <aside 
-            class="hidden md:flex flex-col border-r border-slate-900 bg-slate-950/80 backdrop-blur-xl relative z-30 transition-all duration-300"
+            class="hidden md:flex flex-col border-r border-slate-900 bg-slate-950/80 backdrop-blur-xl relative z-30 transition-all duration-300 sidebar-container h-screen flex-shrink-0"
             :class="sidebarCollapsed ? 'w-16' : 'w-64'"
         >
             <!-- Sidebar Header Brandmark -->
-            <div class="h-16 border-b border-slate-900 flex items-center justify-between px-3" :class="sidebarCollapsed ? 'justify-center' : 'px-5'">
+            <div class="h-16 border-b border-slate-900 flex items-center justify-between px-3 flex-shrink-0" :class="sidebarCollapsed ? 'justify-center' : 'px-5'">
                 <div v-if="!sidebarCollapsed" class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-sm text-white">
                         Æ
@@ -149,8 +149,8 @@ const mobileNavItems = [
                 </button>
             </div>
 
-            <!-- Sidebar Accordion Menus -->
-            <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-6" :class="sidebarCollapsed ? 'px-2' : ''">
+            <!-- Sidebar Accordion Menus - Scrollable -->
+            <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-6 sidebar-nav" :class="sidebarCollapsed ? 'px-2' : ''">
                 <div v-for="(navGroup, groupIdx) in navItems" :key="groupIdx" class="space-y-1.5">
                     <span v-if="!sidebarCollapsed" class="text-[9px] font-mono text-slate-600 uppercase tracking-wider px-3.5 block">
                         {{ navGroup.section }}
@@ -183,7 +183,7 @@ const mobileNavItems = [
             </nav>
 
             <!-- Sidebar Footer -->
-            <div class="p-4 border-t border-slate-900 bg-slate-950/40 text-xs font-mono text-slate-500" :class="sidebarCollapsed ? 'text-center' : ''">
+            <div class="p-4 border-t border-slate-900 bg-slate-950/40 text-xs font-mono text-slate-500 flex-shrink-0" :class="sidebarCollapsed ? 'text-center' : ''">
                 <div class="flex items-center gap-2" :class="sidebarCollapsed ? 'justify-center' : ''">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse flex-shrink-0"></span>
                     <span v-if="!sidebarCollapsed" class="flex items-center gap-1.5">
@@ -196,9 +196,9 @@ const mobileNavItems = [
         </aside>
 
         <!-- MAIN VIEWPORT BODY -->
-        <div class="flex-1 flex flex-col min-w-0 relative z-10 overflow-hidden">
+        <div class="flex-1 flex flex-col min-w-0 relative z-10 h-screen">
             <!-- TOP NAVIGATION BAR -->
-            <header class="h-16 border-b border-slate-900 bg-slate-950/40 backdrop-blur-md flex items-center justify-between px-6">
+            <header class="h-16 border-b border-slate-900 bg-slate-950/40 backdrop-blur-md flex items-center justify-between px-6 flex-shrink-0">
                 <div class="flex items-center gap-4">
                     <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="md:hidden text-slate-400 hover:text-white">
                         <component :is="Menu" class="w-5 h-5" />
@@ -273,7 +273,7 @@ const mobileNavItems = [
                 </div>
             </header>
 
-            <!-- CONTENT DESK FRAME -->
+            <!-- CONTENT DESK FRAME - This will scroll -->
             <main class="flex-1 overflow-y-auto p-6 md:p-8 relative z-10">
                 <div class="max-w-7xl mx-auto">
                     <slot />
@@ -319,19 +319,47 @@ const mobileNavItems = [
 </template>
 
 <style scoped>
-/* Custom scrollbar styling */
+/* Global scrollbar */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
 }
 ::-webkit-scrollbar-track {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(148, 163, 184, 0.2);
+    background: rgba(148, 163, 184, 0.15);
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(148, 163, 184, 0.4);
+    background: rgba(148, 163, 184, 0.3);
+}
+
+/* Sidebar specific scrollbar - even thinner */
+.sidebar-nav::-webkit-scrollbar {
+    width: 3px;
+}
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.12);
+    border-radius: 9999px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.25);
+}
+
+/* Firefox scrollbar support */
+.sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.12) transparent;
+}
+
+/* Prevent sidebar container from overflowing */
+.sidebar-container {
+    min-height: 0;
+    height: 100vh;
+    max-height: 100vh;
 }
 </style>
