@@ -98,13 +98,13 @@ const getRoleColor = (roleName) => {
             <div>
                 <div class="flex items-center gap-2">
                     <component :is="Shield" class="w-5 h-5 text-blue-400" />
-                    <h2 class="text-xl font-bold text-white tracking-tight">Access Control & Staff Security</h2>
+                    <h2 class="text-xl font-bold text-primary tracking-tight">Access Control & Staff Security</h2>
                     <span class="text-[9px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full">{{ roles.length }} roles</span>
                 </div>
-                <p class="text-xs text-slate-500 font-mono mt-0.5">Role-Based Access Control (RBAC) definitions</p>
+                <p class="text-xs text-muted-light font-mono mt-0.5">Role-Based Access Control (RBAC) definitions</p>
             </div>
             <div class="flex items-center gap-2 w-full sm:w-auto">
-                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-white font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-primary font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
                     <component :is="UserPlus" class="w-4 h-4" />
                     New Role
                 </button>
@@ -115,8 +115,8 @@ const getRoleColor = (roleName) => {
             <!-- Roles List -->
             <div class="space-y-3 lg:col-span-1">
                 <div class="flex items-center gap-2 mb-2">
-                    <component :is="Users" class="w-4 h-4 text-slate-400" />
-                    <h3 class="text-xs font-semibold text-slate-400 font-mono uppercase">Roster Roles</h3>
+                    <component :is="Users" class="w-4 h-4 text-muted" />
+                    <h3 class="text-xs font-semibold text-muted font-mono uppercase">Roster Roles</h3>
                 </div>
                 <div class="flex flex-col gap-1">
                     <div 
@@ -124,21 +124,21 @@ const getRoleColor = (roleName) => {
                         :key="role.id" 
                         @click="selectedRoleIndex = idx" 
                         class="group p-4 rounded-xl border cursor-pointer transition-all relative"
-                        :class="selectedRoleIndex === idx ? 'bg-slate-900 border-blue-500/40 shadow-md shadow-blue-500/5' : 'border-slate-800/80 bg-transparent hover:bg-slate-900/30 hover:border-slate-700/80'"
+                        :class="selectedRoleIndex === idx ? 'bg-secondary border-blue-500/40 shadow-md shadow-blue-500/5' : 'border-card bg-transparent hover:bg-card hover:border-card'"
                     >
                         <div class="flex items-start gap-3">
                             <div class="w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center flex-shrink-0" :class="getRoleColor(role.name)">
-                                <component :is="getRoleIcon(role.name)" class="w-4 h-4 text-white" />
+                                <component :is="getRoleIcon(role.name)" class="w-4 h-4 text-primary" />
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start">
-                                    <h4 class="text-xs font-bold text-white truncate">{{ role.name }}</h4>
-                                    <span class="text-[9px] font-mono bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                    <h4 class="text-xs font-bold text-primary truncate">{{ role.name }}</h4>
+                                    <span class="text-[9px] font-mono bg-secondary text-muted px-2 py-0.5 rounded-full flex items-center gap-1">
                                         <component :is="User" class="w-2.5 h-2.5" />
                                         {{ role.userCount }}
                                     </span>
                                 </div>
-                                <p class="text-[10px] text-slate-400 mt-0.5 truncate">{{ role.description }}</p>
+                                <p class="text-[10px] text-muted mt-0.5 truncate">{{ role.description }}</p>
                                 <div v-if="selectedRoleIndex === idx" class="mt-1.5 flex items-center gap-1">
                                     <component :is="CheckCircle" class="w-2.5 h-2.5 text-emerald-400" />
                                     <span class="text-[8px] font-mono text-emerald-400">Selected</span>
@@ -149,8 +149,8 @@ const getRoleColor = (roleName) => {
                 </div>
 
                 <!-- Quick Stats -->
-                <div class="bg-slate-900/20 border border-slate-800/80 rounded-xl p-3 mt-4">
-                    <div class="flex justify-between text-[9px] font-mono text-slate-500">
+                <div class="bg-card-light border border-card rounded-xl p-3 mt-4">
+                    <div class="flex justify-between text-[9px] font-mono text-muted-light">
                         <span class="flex items-center gap-1">
                             <component :is="Users" class="w-3 h-3" />
                             Total Staff: {{ roles.reduce((sum, r) => sum + r.userCount, 0) }}
@@ -164,14 +164,14 @@ const getRoleColor = (roleName) => {
             </div>
 
             <!-- Permissions Panel -->
-            <div class="bg-slate-900/20 border border-slate-800/80 rounded-2xl p-6 lg:col-span-2 space-y-6">
+            <div class="bg-card-light border border-card rounded-2xl p-6 lg:col-span-2 space-y-6">
                 <div class="flex items-start justify-between">
                     <div>
                         <div class="flex items-center gap-2">
                             <component :is="Lock" class="w-4 h-4 text-blue-400" />
-                            <h3 class="text-sm font-semibold text-white">Active Modules Permission Roster</h3>
+                            <h3 class="text-sm font-semibold text-primary">Active Modules Permission Roster</h3>
                         </div>
-                        <p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1">
+                        <p class="text-[10px] text-muted-light mt-0.5 flex items-center gap-1">
                             Configure access constraints for:
                             <span class="text-blue-400 font-bold flex items-center gap-1">
                                 <component :is="getRoleIcon(roles[selectedRoleIndex].name)" class="w-3 h-3" />
@@ -191,32 +191,32 @@ const getRoleColor = (roleName) => {
                         v-for="perm in permissions" 
                         :key="perm.key" 
                         @click="togglePermission(perm.key)" 
-                        class="group flex items-center justify-between p-3 bg-slate-950/60 border rounded-xl cursor-pointer transition-all"
-                        :class="hasPermission(perm.key) ? 'border-blue-500/30 bg-slate-950' : 'border-slate-800/80 hover:border-slate-700/80'"
+                        class="group flex items-center justify-between p-3 bg-input border rounded-xl cursor-pointer transition-all"
+                        :class="hasPermission(perm.key) ? 'border-blue-500/30 bg-primary' : 'border-card hover:border-card'"
                     >
                         <div class="flex items-center gap-2.5">
-                            <component :is="perm.icon" class="w-4 h-4 flex-shrink-0" :class="hasPermission(perm.key) ? 'text-blue-400' : 'text-slate-500'" />
-                            <span class="text-xs text-slate-300 leading-snug group-hover:text-white transition-colors">{{ perm.title }}</span>
+                            <component :is="perm.icon" class="w-4 h-4 flex-shrink-0" :class="hasPermission(perm.key) ? 'text-blue-400' : 'text-muted-light'" />
+                            <span class="text-xs text-tertiary leading-snug group-hover:text-primary transition-colors">{{ perm.title }}</span>
                         </div>
                         <div class="w-5 h-5 rounded flex items-center justify-center border transition-all flex-shrink-0" 
-                            :class="hasPermission(perm.key) ? 'bg-blue-600 border-blue-500 text-white' : 'border-slate-700 bg-transparent'">
+                            :class="hasPermission(perm.key) ? 'bg-blue-600 border-blue-500 text-primary' : 'border-tertiary bg-transparent'">
                             <component v-if="hasPermission(perm.key)" :is="CheckCircle" class="w-3.5 h-3.5" />
                         </div>
                     </div>
                 </div>
 
                 <!-- Action Footer -->
-                <div class="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                    <div class="flex items-center gap-2 text-[10px] font-mono text-slate-500">
+                <div class="border-t border-light pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-muted-light">
                         <component :is="Database" class="w-3 h-3 text-emerald-400" />
                         <span>Security hash committed to ledger logs</span>
-                        <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                        <span class="w-1 h-1 rounded-full bg-muted-light"></span>
                         <span class="flex items-center gap-1">
                             <component :is="Clock" class="w-3 h-3" />
                             Last updated: Today
                         </span>
                     </div>
-                    <button class="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-500 text-xs text-white font-semibold rounded-lg shadow-lg shadow-blue-600/20 transition-colors flex items-center justify-center gap-2">
+                    <button class="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-500 text-xs text-primary font-semibold rounded-lg shadow-lg shadow-blue-600/20 transition-colors flex items-center justify-center gap-2">
                         <component :is="Save" class="w-4 h-4" />
                         Commit Security Modifications
                     </button>

@@ -59,18 +59,18 @@ const { linePath, areaPath } = computed(() => {
 </script>
 
 <template>
-    <div class="w-full bg-slate-900/30 border border-slate-800/80 rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl">
+    <div class="w-full bg-card border border-secondary rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
             <div>
-                <h4 class="text-sm font-medium text-slate-400 font-sans">Global Consolidated Revenue</h4>
-                <p class="text-2xl font-semibold text-white tracking-tight font-display">$924,500 <span class="text-xs text-emerald-400 font-normal font-mono ml-1">+14.2%</span></p>
+                <h4 class="text-sm font-medium text-muted font-sans">Global Consolidated Revenue</h4>
+                <p class="text-2xl font-semibold text-primary tracking-tight font-display">$924,500 <span class="text-xs text-emerald-400 font-normal font-mono ml-1">+14.2%</span></p>
             </div>
-            <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+            <div class="flex items-center gap-4 text-xs font-mono text-muted">
                 <div class="flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                     <span>Monthly Revenue</span>
                 </div>
-                <span class="text-slate-600">|</span>
+                <span class="text-placeholder">|</span>
                 <span>Rolling 7 Months</span>
             </div>
         </div>
@@ -107,11 +107,11 @@ const { linePath, areaPath } = computed(() => {
                 </svg>
 
                 <!-- Tooltip -->
-                <div v-if="hoveredIndex !== null" class="absolute bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-slate-300 pointer-events-none shadow-2xl backdrop-blur-md z-10" :style="{ left: `${getX(hoveredIndex) + 20}px`, top: `${getY(REVENUE_DATA[hoveredIndex].value) - 10}px` }">
-                    <p class="font-semibold text-white mb-1">{{ REVENUE_DATA[hoveredIndex].month }} Consolidated</p>
+                <div v-if="hoveredIndex !== null" class="absolute bg-primary border border-tertiary rounded-lg p-2.5 text-xs text-tertiary pointer-events-none shadow-2xl backdrop-blur-md z-10" :style="{ left: `${getX(hoveredIndex) + 20}px`, top: `${getY(REVENUE_DATA[hoveredIndex].value) - 10}px` }">
+                    <p class="font-semibold text-primary mb-1">{{ REVENUE_DATA[hoveredIndex].month }} Consolidated</p>
                     <div class="flex gap-4 font-mono text-[10px]">
-                        <div><span class="text-slate-500">Revenue:</span> <span class="text-blue-400 font-bold">${REVENUE_DATA[hoveredIndex].value.toLocaleString()}</span></div>
-                        <div><span class="text-slate-500">Sales:</span> <span class="text-emerald-400">{{ REVENUE_DATA[hoveredIndex].transactions }}</span></div>
+                        <div><span class="text-muted-light">Revenue:</span> <span class="text-blue-400 font-bold">${REVENUE_DATA[hoveredIndex].value.toLocaleString()}</span></div>
+                        <div><span class="text-muted-light">Sales:</span> <span class="text-emerald-400">{{ REVENUE_DATA[hoveredIndex].transactions }}</span></div>
                     </div>
                 </div>
             </div>

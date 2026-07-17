@@ -75,28 +75,28 @@ const totalValue = ref(0);
             <div>
                 <div class="flex items-center gap-2">
                     <component :is="Truck" class="w-5 h-5 text-blue-400" />
-                    <h2 class="text-xl font-bold text-white tracking-tight">Procurement & Purchases Requisition</h2>
+                    <h2 class="text-xl font-bold text-primary tracking-tight">Procurement & Purchases Requisition</h2>
                 </div>
-                <p class="text-xs text-slate-500 font-mono mt-0.5">Submit procurement orders directly to manufacturers</p>
+                <p class="text-xs text-muted-light font-mono mt-0.5">Submit procurement orders directly to manufacturers</p>
             </div>
 
             <div class="grid md:grid-cols-12 gap-8 items-start">
                 <!-- Left Column - Form -->
-                <div class="md:col-span-5 bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl space-y-4">
+                <div class="md:col-span-5 bg-card-hover border border-card p-6 rounded-2xl space-y-4">
                     <div class="flex items-center gap-2">
                         <component :is="ShoppingCart" class="w-4 h-4 text-blue-400" />
-                        <h3 class="text-xs font-semibold text-slate-400 font-mono uppercase">Request Stock Intake</h3>
+                        <h3 class="text-xs font-semibold text-muted font-mono uppercase">Request Stock Intake</h3>
                     </div>
 
                     <form @submit="submit" class="space-y-4">
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-mono text-slate-500 uppercase flex items-center gap-1.5">
+                            <label class="text-[10px] font-mono text-muted-light uppercase flex items-center gap-1.5">
                                 <component :is="Package" class="w-3 h-3" />
                                 Intake Product SKU
                             </label>
                             <select 
                                 v-model="reqProdId" 
-                                class="w-full bg-slate-950 border border-slate-800/80 focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-slate-200 outline-none transition-all"
+                                class="w-full bg-primary border border-card focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-secondary outline-none transition-all"
                             >
                                 <option v-for="p in products" :key="p.id" :value="p.id">
                                     {{ p.name }} (Stock: {{ p.stock }})
@@ -105,35 +105,35 @@ const totalValue = ref(0);
                         </div>
 
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-mono text-slate-500 uppercase flex items-center gap-1.5">
+                            <label class="text-[10px] font-mono text-muted-light uppercase flex items-center gap-1.5">
                                 <component :is="TrendingUp" class="w-3 h-3" />
                                 Quantity to Requisition
                             </label>
                             <div class="flex items-center gap-2">
-                                <button @click="reqQty = Math.max(1, reqQty - 10)" type="button" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                                <button @click="reqQty = Math.max(1, reqQty - 10)" type="button" class="p-2 rounded-lg bg-secondary hover:bg-card-active text-muted hover:text-primary transition-colors">
                                     <component :is="Minus" class="w-3.5 h-3.5" />
                                 </button>
                                 <input 
                                     type="number" 
                                     v-model="reqQty" 
-                                    class="flex-1 bg-slate-950 border border-slate-800/80 focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-white font-mono outline-none transition-all text-center"
+                                    class="flex-1 bg-primary border border-card focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-primary font-mono outline-none transition-all text-center"
                                 />
-                                <button @click="reqQty = Math.min(1000, reqQty + 10)" type="button" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                                <button @click="reqQty = Math.min(1000, reqQty + 10)" type="button" class="p-2 rounded-lg bg-secondary hover:bg-card-active text-muted hover:text-primary transition-colors">
                                     <component :is="Plus" class="w-3.5 h-3.5" />
                                 </button>
                             </div>
                         </div>
 
                         <!-- Selected Product Info -->
-                        <div v-if="getProduct(reqProdId)" class="bg-slate-950/50 border border-slate-800/60 rounded-lg p-2.5 text-[10px] font-mono text-slate-400">
-                            <span class="text-slate-500">Current Stock:</span>
-                            <span class="text-white font-bold">{{ getProduct(reqProdId).stock }} units</span>
-                            <span class="text-slate-600 mx-1">|</span>
-                            <span class="text-slate-500">After order:</span>
+                        <div v-if="getProduct(reqProdId)" class="bg-card-50 border border-light rounded-lg p-2.5 text-[10px] font-mono text-muted">
+                            <span class="text-muted-light">Current Stock:</span>
+                            <span class="text-primary font-bold">{{ getProduct(reqProdId).stock }} units</span>
+                            <span class="text-placeholder mx-1">|</span>
+                            <span class="text-muted-light">After order:</span>
                             <span class="text-emerald-400 font-bold">{{ getProduct(reqProdId).stock + reqQty }} units</span>
                         </div>
 
-                        <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
+                        <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs text-primary font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
                             <component :is="Send" class="w-4 h-4" />
                             Authorize Procurement Order
                         </button>
@@ -147,46 +147,46 @@ const totalValue = ref(0);
                 </div>
 
                 <!-- Right Column - Suppliers -->
-                <div class="md:col-span-7 bg-slate-900/20 border border-slate-800/80 rounded-2xl p-6 space-y-4">
+                <div class="md:col-span-7 bg-card-light border border-card rounded-2xl p-6 space-y-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <component :is="Users" class="w-4 h-4 text-emerald-400" />
-                            <h3 class="text-xs font-semibold text-slate-300 font-mono">Verified Supplier List</h3>
+                            <h3 class="text-xs font-semibold text-tertiary font-mono">Verified Supplier List</h3>
                         </div>
-                        <span class="text-[8px] font-mono text-slate-500">{{ suppliers.length }} active</span>
+                        <span class="text-[8px] font-mono text-muted-light">{{ suppliers.length }} active</span>
                     </div>
 
                     <div class="space-y-3">
-                        <div v-for="sup in suppliers" :key="sup.id" class="group bg-slate-950 border border-slate-800/80 p-4 rounded-xl hover:border-slate-700/80 hover:bg-slate-900/30 transition-all">
+                        <div v-for="sup in suppliers" :key="sup.id" class="group bg-primary border border-card p-4 rounded-xl hover:border-card hover:bg-card transition-all">
                             <div class="flex justify-between items-start">
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 flex items-center justify-center flex-shrink-0">
-                                        <component :is="Building2" class="w-4 h-4 text-white" />
+                                        <component :is="Building2" class="w-4 h-4 text-primary" />
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-white text-xs">{{ sup.name }}</h4>
-                                        <p class="text-[10px] font-mono text-slate-500 mt-0.5 flex items-center gap-1">
+                                        <h4 class="font-semibold text-primary text-xs">{{ sup.name }}</h4>
+                                        <p class="text-[10px] font-mono text-muted-light mt-0.5 flex items-center gap-1">
                                             <component :is="Mail" class="w-2.5 h-2.5" />
                                             {{ sup.email }}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[10px] font-mono text-slate-500 block">Unpaid Balance</span>
-                                    <span class="font-mono text-slate-200 font-bold flex items-center justify-end gap-1">
+                                    <span class="text-[10px] font-mono text-muted-light block">Unpaid Balance</span>
+                                    <span class="font-mono text-secondary font-bold flex items-center justify-end gap-1">
                                         <component :is="DollarSign" class="w-3 h-3 text-amber-400" />
                                         ${{ sup.outstandingBalance.toLocaleString() }}
                                     </span>
                                 </div>
                             </div>
                             <!-- Hover actions -->
-                            <div class="mt-2 pt-2 border-t border-slate-800/60 flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="mt-2 pt-2 border-t border-light flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button class="text-[8px] font-mono text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
                                     <component :is="Send" class="w-2.5 h-2.5" />
                                     Place Order
                                 </button>
-                                <span class="text-slate-600">|</span>
-                                <button class="text-[8px] font-mono text-slate-500 hover:text-white transition-colors flex items-center gap-1">
+                                <span class="text-placeholder">|</span>
+                                <button class="text-[8px] font-mono text-muted-light hover:text-primary transition-colors flex items-center gap-1">
                                     <component :is="Eye" class="w-2.5 h-2.5" />
                                     View History
                                 </button>
@@ -195,7 +195,7 @@ const totalValue = ref(0);
                     </div>
 
                     <!-- Supplier Stats -->
-                    <div class="border-t border-slate-800/60 pt-3 flex justify-between text-[9px] font-mono text-slate-500">
+                    <div class="border-t border-light pt-3 flex justify-between text-[9px] font-mono text-muted-light">
                         <span class="flex items-center gap-1.5">
                             <component :is="DollarSign" class="w-3 h-3 text-amber-400" />
                             Total Outstanding: ${{ suppliers.reduce((sum, s) => sum + s.outstandingBalance, 0).toLocaleString() }}
@@ -210,17 +210,17 @@ const totalValue = ref(0);
 
             <!-- Quick Actions -->
             <div class="grid grid-cols-3 gap-3">
-                <Link :href="route('dashboard.products')" class="p-3 bg-slate-900/30 border border-slate-800/80 rounded-xl text-center hover:border-slate-700/80 transition-all group">
+                <Link :href="route('dashboard.products')" class="p-3 bg-card border border-card rounded-xl text-center hover:border-card transition-all group">
                     <component :is="Package" class="w-4 h-4 text-blue-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <span class="text-[8px] font-mono text-slate-400 group-hover:text-white transition-colors">View Inventory</span>
+                    <span class="text-[8px] font-mono text-muted group-hover:text-primary transition-colors">View Inventory</span>
                 </Link>
-                <Link :href="route('dashboard.warehouses')" class="p-3 bg-slate-900/30 border border-slate-800/80 rounded-xl text-center hover:border-slate-700/80 transition-all group">
+                <Link :href="route('dashboard.warehouses')" class="p-3 bg-card border border-card rounded-xl text-center hover:border-card transition-all group">
                     <component :is="Building2" class="w-4 h-4 text-emerald-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <span class="text-[8px] font-mono text-slate-400 group-hover:text-white transition-colors">Warehouses</span>
+                    <span class="text-[8px] font-mono text-muted group-hover:text-primary transition-colors">Warehouses</span>
                 </Link>
-                <Link :href="route('dashboard.finance')" class="p-3 bg-slate-900/30 border border-slate-800/80 rounded-xl text-center hover:border-slate-700/80 transition-all group">
+                <Link :href="route('dashboard.finance')" class="p-3 bg-card border border-card rounded-xl text-center hover:border-card transition-all group">
                     <component :is="DollarSign" class="w-4 h-4 text-amber-400 mx-auto mb-1 group-hover:scale-110 transition-transform" />
-                    <span class="text-[8px] font-mono text-slate-400 group-hover:text-white transition-colors">Finance Ledger</span>
+                    <span class="text-[8px] font-mono text-muted group-hover:text-primary transition-colors">Finance Ledger</span>
                 </Link>
             </div>
         </div>

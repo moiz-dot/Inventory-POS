@@ -72,13 +72,13 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
             <div>
                 <div class="flex items-center gap-2">
                     <component :is="Warehouse" class="w-5 h-5 text-blue-400" />
-                    <h2 class="text-xl font-bold text-white tracking-tight">Distribution Centers & Depots</h2>
+                    <h2 class="text-xl font-bold text-primary tracking-tight">Distribution Centers & Depots</h2>
                     <span class="text-[9px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full">{{ warehouses.length }} facilities</span>
                 </div>
-                <p class="text-xs text-slate-500 font-mono mt-0.5">Core physical stock supply centers</p>
+                <p class="text-xs text-muted-light font-mono mt-0.5">Core physical stock supply centers</p>
             </div>
             <div class="flex items-center gap-2 w-full sm:w-auto">
-                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-white font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-primary font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
                     <component :is="Plus" class="w-4 h-4" />
                     Add Depot
                 </button>
@@ -87,39 +87,39 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
 
         <!-- Quick Stats -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-            <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+            <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                 <div class="flex items-center justify-center gap-1.5">
                     <component :is="Warehouse" class="w-4 h-4 text-blue-400" />
-                    <span class="text-lg font-bold text-white">{{ warehouses.length }}</span>
+                    <span class="text-lg font-bold text-primary">{{ warehouses.length }}</span>
                 </div>
-                <p class="text-[9px] font-mono text-slate-500 uppercase">Total Depots</p>
+                <p class="text-[9px] font-mono text-muted-light uppercase">Total Depots</p>
             </div>
-            <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+            <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                 <div class="flex items-center justify-center gap-1.5">
                     <component :is="Boxes" class="w-4 h-4 text-emerald-400" />
-                    <span class="text-lg font-bold text-white">{{ totalCapacity.toLocaleString() }}</span>
+                    <span class="text-lg font-bold text-primary">{{ totalCapacity.toLocaleString() }}</span>
                 </div>
-                <p class="text-[9px] font-mono text-slate-500 uppercase">Total Sq Ft</p>
+                <p class="text-[9px] font-mono text-muted-light uppercase">Total Sq Ft</p>
             </div>
-            <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+            <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                 <div class="flex items-center justify-center gap-1.5">
                     <component :is="TrendingUp" class="w-4 h-4 text-amber-400" />
-                    <span class="text-lg font-bold text-white">{{ avgUtilization }}%</span>
+                    <span class="text-lg font-bold text-primary">{{ avgUtilization }}%</span>
                 </div>
-                <p class="text-[9px] font-mono text-slate-500 uppercase">Avg Utilization</p>
+                <p class="text-[9px] font-mono text-muted-light uppercase">Avg Utilization</p>
             </div>
-            <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+            <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                 <div class="flex items-center justify-center gap-1.5">
                     <component :is="DollarSign" class="w-4 h-4 text-emerald-400" />
-                    <span class="text-lg font-bold text-white">${{ totalValue.toLocaleString() }}</span>
+                    <span class="text-lg font-bold text-primary">${{ totalValue.toLocaleString() }}</span>
                 </div>
-                <p class="text-[9px] font-mono text-slate-500 uppercase">Total Asset Value</p>
+                <p class="text-[9px] font-mono text-muted-light uppercase">Total Asset Value</p>
             </div>
         </div>
 
         <!-- Warehouse Cards -->
         <div class="grid md:grid-cols-3 gap-6">
-            <div v-for="wh in warehouses" :key="wh.id" class="group bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl space-y-4 hover:border-slate-700/80 hover:bg-slate-900/60 transition-all relative overflow-hidden">
+            <div v-for="wh in warehouses" :key="wh.id" class="group bg-card-hover border border-card p-6 rounded-2xl space-y-4 hover:border-card hover:bg-card-active transition-all relative overflow-hidden">
                 <!-- Background glow -->
                 <div class="absolute -inset-1 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity"></div>
 
@@ -128,11 +128,11 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
                     <div class="flex justify-between items-start">
                         <div class="flex items-start gap-2.5">
                             <div class="w-9 h-9 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0">
-                                <component :is="Warehouse" class="w-4 h-4 text-white" />
+                                <component :is="Warehouse" class="w-4 h-4 text-primary" />
                             </div>
                             <div>
-                                <h3 class="text-sm font-bold text-white leading-snug group-hover:text-blue-200 transition-colors">{{ wh.name }}</h3>
-                                <p class="text-[10px] font-mono text-slate-500 mt-0.5 flex items-center gap-1.5">
+                                <h3 class="text-sm font-bold text-primary leading-snug group-hover:text-blue-200 transition-colors">{{ wh.name }}</h3>
+                                <p class="text-[10px] font-mono text-muted-light mt-0.5 flex items-center gap-1.5">
                                     <component :is="User" class="w-3 h-3" />
                                     Manager: {{ wh.manager }}
                                 </p>
@@ -147,9 +147,9 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
 
                 <!-- Utilization -->
                 <div class="relative space-y-1.5">
-                    <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                    <div class="flex justify-between items-center text-[10px] font-mono text-muted">
                         <span class="flex items-center gap-1">
-                            <component :is="HardDrive" class="w-3 h-3 text-slate-500" />
+                            <component :is="HardDrive" class="w-3 h-3 text-muted-light" />
                             Capacity: {{ wh.capacity }}
                         </span>
                         <span class="flex items-center gap-1" :class="getUtilizationStatusColor(wh.utilization)">
@@ -157,10 +157,10 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
                             {{ wh.utilization }}% utilized
                         </span>
                     </div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div class="w-full bg-secondary h-2 rounded-full overflow-hidden">
                         <div class="h-full rounded-full transition-all duration-500" :class="getUtilizationColor(wh.utilization)" :style="{ width: wh.utilization + '%' }"></div>
                     </div>
-                    <div class="flex justify-between text-[8px] font-mono text-slate-600">
+                    <div class="flex justify-between text-[8px] font-mono text-placeholder">
                         <span>0%</span>
                         <span class="flex items-center gap-0.5">
                             <component :is="getUtilizationStatus(wh.utilization) === 'High' ? AlertTriangle : getUtilizationStatus(wh.utilization) === 'Medium' ? Clock : CheckCircle" 
@@ -173,20 +173,20 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
                 </div>
 
                 <!-- Footer -->
-                <div class="relative border-t border-slate-800/60 pt-4 flex justify-between items-center font-mono text-xs">
-                    <span class="text-slate-500 flex items-center gap-1.5">
+                <div class="relative border-t border-light pt-4 flex justify-between items-center font-mono text-xs">
+                    <span class="text-muted-light flex items-center gap-1.5">
                         <component :is="DollarSign" class="w-3 h-3" />
                         Asset Value
                     </span>
-                    <span class="text-white font-bold">${{ wh.stockValue.toLocaleString() }}</span>
+                    <span class="text-primary font-bold">${{ wh.stockValue.toLocaleString() }}</span>
                 </div>
 
                 <!-- Hover Actions -->
                 <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                    <button class="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                    <button class="p-1.5 rounded bg-secondary hover:bg-card-active text-muted hover:text-primary transition-colors">
                         <component :is="Eye" class="w-3 h-3" />
                     </button>
-                    <button class="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                    <button class="p-1.5 rounded bg-secondary hover:bg-card-active text-muted hover:text-primary transition-colors">
                         <component :is="Edit" class="w-3 h-3" />
                     </button>
                 </div>
@@ -194,10 +194,10 @@ const avgUtilization = Math.round(warehouses.reduce((sum, w) => sum + w.utilizat
         </div>
 
         <!-- Empty state if no warehouses -->
-        <div v-if="warehouses.length === 0" class="text-center py-16 bg-slate-900/20 border border-slate-800/80 rounded-2xl">
-            <component :is="Warehouse" class="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <p class="text-sm text-slate-400">No distribution centers configured</p>
-            <p class="text-xs text-slate-500 mt-1">Add your first warehouse to start tracking inventory</p>
+        <div v-if="warehouses.length === 0" class="text-center py-16 bg-card-light border border-card rounded-2xl">
+            <component :is="Warehouse" class="w-12 h-12 text-placeholder mx-auto mb-3" />
+            <p class="text-sm text-muted">No distribution centers configured</p>
+            <p class="text-xs text-muted-light mt-1">Add your first warehouse to start tracking inventory</p>
         </div>
     </AppLayout>
 </template>

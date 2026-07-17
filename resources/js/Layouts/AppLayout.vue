@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import { initTheme, toggleTheme, theme } from '@/composables/useTheme';
 
 // Import Lucide Vue icons
 import {
@@ -32,12 +33,17 @@ import {
   Mail,
   Layers,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  Sun,
+  Moon
 } from 'lucide-vue-next';
 
 defineProps({
     title: String,
 });
+
+const page = usePage();
+initTheme(page.props.theme);
 
 const showingNavigationDropdown = ref(false);
 const sidebarCollapsed = ref(false);
@@ -113,7 +119,7 @@ const mobileNavItems = [
 </script>
 
 <template>
-    <div class="min-h-screen h-screen bg-slate-950 text-slate-100 flex font-sans select-none overflow-hidden">
+    <div class="min-h-screen h-screen bg-primary text-secondary flex font-sans select-none overflow-hidden">
         <Head :title="title" />
         <Banner />
 
@@ -122,27 +128,27 @@ const mobileNavItems = [
 
         <!-- LEFT SIDEBAR NAVIGATION -->
         <aside 
-            class="hidden md:flex flex-col border-r border-slate-900 bg-slate-950/80 backdrop-blur-xl relative z-30 transition-all duration-300 sidebar-container h-screen flex-shrink-0"
+            class="hidden md:flex flex-col border-r border-primary bg-overlay backdrop-blur-xl relative z-30 transition-all duration-300 sidebar-container h-screen flex-shrink-0"
             :class="sidebarCollapsed ? 'w-16' : 'w-64'"
         >
             <!-- Sidebar Header Brandmark -->
-            <div class="h-16 border-b border-slate-900 flex items-center justify-between px-3 flex-shrink-0" :class="sidebarCollapsed ? 'justify-center' : 'px-5'">
+            <div class="h-16 border-b border-primary flex items-center justify-between px-3 flex-shrink-0" :class="sidebarCollapsed ? 'justify-center' : 'px-5'">
                 <div v-if="!sidebarCollapsed" class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-sm text-white">
+                    <div class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-sm text-primary">
                         Æ
                     </div>
                     <div>
                         <span class="font-display font-bold text-sm tracking-wider">AETHER</span>
-                        <span class="text-[8px] font-mono text-slate-500 block">CORE PLATFORM v4.2</span>
+                        <span class="text-[8px] font-mono text-muted-light block">CORE PLATFORM v4.2</span>
                     </div>
                 </div>
-                <div v-else class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-sm text-white mx-auto">
+                <div v-else class="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-sm text-primary mx-auto">
                     Æ
                 </div>
                 <!-- Collapse Toggle Button -->
                 <button 
                     @click="toggleSidebar" 
-                    class="text-slate-500 hover:text-white transition-colors flex-shrink-0"
+                    class="text-muted-light hover:text-primary transition-colors flex-shrink-0"
                     :class="sidebarCollapsed ? 'mx-auto mt-2' : ''"
                 >
                     <component :is="sidebarCollapsed ? PanelLeftOpen : PanelLeftClose" class="w-4 h-4" />
@@ -152,10 +158,10 @@ const mobileNavItems = [
             <!-- Sidebar Accordion Menus - Scrollable -->
             <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-6 sidebar-nav" :class="sidebarCollapsed ? 'px-2' : ''">
                 <div v-for="(navGroup, groupIdx) in navItems" :key="groupIdx" class="space-y-1.5">
-                    <span v-if="!sidebarCollapsed" class="text-[9px] font-mono text-slate-600 uppercase tracking-wider px-3.5 block">
+                    <span v-if="!sidebarCollapsed" class="text-[9px] font-mono text-placeholder uppercase tracking-wider px-3.5 block">
                         {{ navGroup.section }}
                     </span>
-                    <div v-else class="h-0.5 w-full bg-slate-800/60 rounded-full my-2"></div>
+                    <div v-else class="h-0.5 w-full bg-card-hover rounded-full my-2"></div>
                     
                     <div class="space-y-0.5">
                         <Link 
@@ -166,15 +172,15 @@ const mobileNavItems = [
                             :class="[
                                 sidebarCollapsed ? 'justify-center px-2' : '',
                                 $page.url === route(item.route).url || $page.url.startsWith(route(item.route).url + '/') 
-                                    ? 'bg-slate-900 text-blue-400 font-semibold border border-slate-800/80' 
-                                    : 'text-slate-400 hover:text-white hover:bg-slate-900/30'
+                                    ? 'bg-secondary text-blue-400 font-semibold border border-card' 
+                                    : 'text-muted hover:text-primary hover:bg-card-50'
                             ]"
                         >
                             <component :is="item.icon" class="w-4 h-4 flex-shrink-0" />
                             <span v-if="!sidebarCollapsed" class="truncate">{{ item.label }}</span>
                             
                             <!-- Tooltip on hover when collapsed -->
-                            <div v-if="sidebarCollapsed" class="absolute left-full ml-2 px-2 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] text-white whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                            <div v-if="sidebarCollapsed" class="absolute left-full ml-2 px-2 py-1 bg-secondary border border-tertiary rounded text-[10px] text-primary whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                                 {{ item.label }}
                             </div>
                         </Link>
@@ -183,7 +189,7 @@ const mobileNavItems = [
             </nav>
 
             <!-- Sidebar Footer -->
-            <div class="p-4 border-t border-slate-900 bg-slate-950/40 text-xs font-mono text-slate-500 flex-shrink-0" :class="sidebarCollapsed ? 'text-center' : ''">
+            <div class="p-4 border-t border-primary bg-glass-light text-xs font-mono text-muted-light flex-shrink-0" :class="sidebarCollapsed ? 'text-center' : ''">
                 <div class="flex items-center gap-2" :class="sidebarCollapsed ? 'justify-center' : ''">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse flex-shrink-0"></span>
                     <span v-if="!sidebarCollapsed" class="flex items-center gap-1.5">
@@ -198,23 +204,32 @@ const mobileNavItems = [
         <!-- MAIN VIEWPORT BODY -->
         <div class="flex-1 flex flex-col min-w-0 relative z-10 h-screen">
             <!-- TOP NAVIGATION BAR -->
-            <header class="h-16 border-b border-slate-900 bg-slate-950/40 backdrop-blur-md flex items-center justify-between px-6 flex-shrink-0">
+            <header class="h-16 border-b border-primary bg-glass-light backdrop-blur-md flex items-center justify-between px-6 flex-shrink-0">
                 <div class="flex items-center gap-4">
-                    <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="md:hidden text-slate-400 hover:text-white">
+                    <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="md:hidden text-muted hover:text-primary">
                         <component :is="Menu" class="w-5 h-5" />
                     </button>
-                    <div class="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-500">
+                    <div class="hidden sm:flex items-center gap-2 text-xs font-mono text-muted-light">
                         <component :is="Layers" class="w-3 h-3" />
                         <span>LEDGER DEPOT</span>
                         <span>/</span>
-                        <span class="text-white font-sans font-semibold capitalize">Overview</span>
+                        <span class="text-primary font-sans font-semibold capitalize">Overview</span>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
+                    <!-- Theme Toggle -->
+                    <button 
+                        @click="toggleTheme"
+                        class="p-2 text-muted hover:text-primary rounded-lg hover:bg-card-50 transition-colors relative"
+                        title="Toggle theme"
+                    >
+                        <component :is="theme === 'dark' ? Sun : Moon" class="w-4 h-4" />
+                    </button>
+
                     <!-- Notifications Alert Bell -->
                     <div class="relative">
-                        <button class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-900/50 transition-colors relative">
+                        <button class="p-2 text-muted hover:text-primary rounded-lg hover:bg-card-50 transition-colors relative">
                             <component :is="Bell" class="w-4 h-4" />
                             <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-500"></span>
                         </button>
@@ -224,13 +239,13 @@ const mobileNavItems = [
                     <div class="relative">
                         <Dropdown align="right" width="48">
                             <template #trigger>
-                                <button class="flex items-center gap-2.5 pl-2 py-1 pr-1 rounded-lg hover:bg-slate-900/40 transition-colors">
-                                    <div class="w-7 h-7 rounded-md bg-blue-600 flex items-center justify-center font-bold text-xs text-white">
+                                <button class="flex items-center gap-2.5 pl-2 py-1 pr-1 rounded-lg hover:bg-card-50 transition-colors">
+                                    <div class="w-7 h-7 rounded-md bg-blue-600 flex items-center justify-center font-bold text-xs text-primary">
                                         {{ $page.props.auth.user.name.charAt(0) }}
                                     </div>
                                     <div class="hidden lg:block text-left">
-                                        <span class="text-xs font-semibold text-white block">{{ $page.props.auth.user.name }}</span>
-                                        <span class="text-[9px] font-mono text-slate-500 block -mt-0.5">{{ $page.props.auth.user.email }}</span>
+                                        <span class="text-xs font-semibold text-primary block">{{ $page.props.auth.user.name }}</span>
+                                        <span class="text-[9px] font-mono text-muted-light block -mt-0.5">{{ $page.props.auth.user.email }}</span>
                                     </div>
                                 </button>
                             </template>
@@ -241,16 +256,16 @@ const mobileNavItems = [
                                         <component :is="Shield" class="w-3 h-3" />
                                         Authenticated User
                                     </span>
-                                    <h4 class="text-xs font-bold text-white mt-1 flex items-center gap-1.5">
+                                    <h4 class="text-xs font-bold text-primary mt-1 flex items-center gap-1.5">
                                         <component :is="UserCircle" class="w-3.5 h-3.5 text-blue-400" />
                                         {{ $page.props.auth.user.name }}
                                     </h4>
-                                    <p class="text-[10px] font-mono text-slate-500 truncate flex items-center gap-1">
+                                    <p class="text-[10px] font-mono text-muted-light truncate flex items-center gap-1">
                                         <component :is="Mail" class="w-3 h-3" />
                                         {{ $page.props.auth.user.email }}
                                     </p>
                                 </div>
-                                <div class="border-t border-slate-900 pt-3 space-y-1 text-xs">
+                                <div class="border-t border-primary pt-3 space-y-1 text-xs">
                                     <DropdownLink :href="route('profile.show')">
                                         <component :is="User" class="w-3.5 h-3.5 mr-2" />
                                         Profile
@@ -259,7 +274,7 @@ const mobileNavItems = [
                                         <component :is="Key" class="w-3.5 h-3.5 mr-2" />
                                         API Tokens
                                     </DropdownLink>
-                                    <div class="border-t border-slate-900"></div>
+                                    <div class="border-t border-primary"></div>
                                     <form @submit.prevent="logout">
                                         <DropdownLink as="button" class="text-red-400">
                                             <component :is="LogOut" class="w-3.5 h-3.5 mr-2" />
@@ -282,15 +297,15 @@ const mobileNavItems = [
         </div>
 
         <!-- Mobile Navigation Panel -->
-        <div v-if="showingNavigationDropdown" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm md:hidden flex justify-start">
-            <div class="w-64 bg-slate-950 border-r border-slate-900 p-5 space-y-6 flex flex-col justify-between animate-in slide-in-from-left duration-200">
+        <div v-if="showingNavigationDropdown" class="fixed inset-0 z-50 bg-overlay backdrop-blur-sm md:hidden flex justify-start">
+            <div class="w-64 bg-primary border-r border-primary p-5 space-y-6 flex flex-col justify-between animate-in slide-in-from-left duration-200">
                 <div class="space-y-6">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded bg-blue-600 flex items-center justify-center font-bold text-sm text-white">Æ</div>
+                            <div class="w-7 h-7 rounded bg-blue-600 flex items-center justify-center font-bold text-sm text-primary">Æ</div>
                             <span class="font-display font-bold text-sm tracking-widest">AETHER</span>
                         </div>
-                        <button @click="showingNavigationDropdown = false" class="text-slate-500 hover:text-white">
+                        <button @click="showingNavigationDropdown = false" class="text-muted-light hover:text-primary">
                             <component :is="X" class="w-5 h-5" />
                         </button>
                     </div>
@@ -299,8 +314,8 @@ const mobileNavItems = [
                             v-for="(item, idx) in mobileNavItems" 
                             :key="idx"
                             :href="route(item.route)" 
-                            class="block px-3 py-2 text-xs text-slate-400 hover:text-white hover:bg-slate-900/30 rounded-lg transition-colors"
-                            :class="idx === 0 ? 'text-white bg-slate-900' : ''"
+                            class="block px-3 py-2 text-xs text-muted hover:text-primary hover:bg-card-50 rounded-lg transition-colors"
+                            :class="idx === 0 ? 'text-primary bg-secondary' : ''"
                             @click="showingNavigationDropdown = false"
                         >
                             {{ item.label }}

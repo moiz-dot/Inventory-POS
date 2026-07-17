@@ -106,17 +106,17 @@ const filteredLogs = computed(() => {
                 <div>
                     <div class="flex items-center gap-2">
                         <component :is="FileText" class="w-5 h-5 text-blue-400" />
-                        <h2 class="text-xl font-bold text-white tracking-tight">Security Audit Logging</h2>
+                        <h2 class="text-xl font-bold text-primary tracking-tight">Security Audit Logging</h2>
                         <span class="text-[9px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full">{{ auditLogs.length }} entries</span>
                     </div>
-                    <p class="text-xs text-slate-500 font-mono mt-0.5">Immutable staff ledger tracking records</p>
+                    <p class="text-xs text-muted-light font-mono mt-0.5">Immutable staff ledger tracking records</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button class="px-3 py-2 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                    <button class="px-3 py-2 bg-secondary border border-tertiary hover:border-tertiary rounded-lg text-[10px] text-muted hover:text-primary transition-colors flex items-center gap-1.5">
                         <component :is="RefreshCw" class="w-3.5 h-3.5" />
                         Refresh
                     </button>
-                    <button class="px-3 py-2 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg text-[10px] text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                    <button class="px-3 py-2 bg-secondary border border-tertiary hover:border-tertiary rounded-lg text-[10px] text-muted hover:text-primary transition-colors flex items-center gap-1.5">
                         <component :is="Download" class="w-3.5 h-3.5" />
                         Export
                     </button>
@@ -125,56 +125,56 @@ const filteredLogs = computed(() => {
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="Activity" class="w-4 h-4 text-blue-400" />
-                        <span class="text-lg font-bold text-white">{{ stats.total }}</span>
+                        <span class="text-lg font-bold text-primary">{{ stats.total }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Total Events</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Total Events</p>
                 </div>
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="CheckCircle" class="w-4 h-4 text-emerald-400" />
-                        <span class="text-lg font-bold text-white">{{ stats.success }}</span>
+                        <span class="text-lg font-bold text-primary">{{ stats.success }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Successful</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Successful</p>
                 </div>
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="AlertTriangle" class="w-4 h-4 text-amber-400" />
-                        <span class="text-lg font-bold text-white">{{ stats.warnings }}</span>
+                        <span class="text-lg font-bold text-primary">{{ stats.warnings }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Warnings</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Warnings</p>
                 </div>
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="XCircle" class="w-4 h-4 text-red-400" />
-                        <span class="text-lg font-bold text-white">{{ stats.failed }}</span>
+                        <span class="text-lg font-bold text-primary">{{ stats.failed }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Failed</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Failed</p>
                 </div>
             </div>
 
             <!-- Search -->
             <div class="relative max-w-md">
-                <component :is="Search" class="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2" />
+                <component :is="Search" class="w-4 h-4 text-muted-light absolute left-4 top-1/2 -translate-y-1/2" />
                 <input 
                     v-model="searchQuery" 
                     type="text" 
                     placeholder="Search logs by user, action, module or IP..." 
-                    class="w-full bg-slate-900/40 border border-slate-800/80 focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 rounded-xl py-2.5 pl-12 pr-4 text-xs text-slate-200 outline-none transition-all placeholder:text-slate-500"
+                    class="w-full bg-card-hover border border-card focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 rounded-xl py-2.5 pl-12 pr-4 text-xs text-secondary outline-none transition-all placeholder:text-muted-light"
                 />
-                <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
+                <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-light hover:text-primary transition-colors">
                     <component :is="XCircle" class="w-3.5 h-3.5" />
                 </button>
             </div>
 
             <!-- Table -->
-            <div class="bg-slate-900/20 border border-slate-800/80 rounded-2xl overflow-hidden">
+            <div class="bg-card-light border border-card rounded-2xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-800/80 font-mono text-[9px] text-slate-500 uppercase tracking-wider bg-slate-900/30">
+                            <tr class="border-b border-card font-mono text-[9px] text-muted-light uppercase tracking-wider bg-card">
                                 <th class="p-4 flex items-center gap-1">
                                     <component :is="Clock" class="w-3 h-3" />
                                     Timestamp
@@ -195,25 +195,25 @@ const filteredLogs = computed(() => {
                                 <th class="p-4 text-center">Status</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-800/60 text-xs text-slate-300">
-                            <tr v-for="log in filteredLogs" :key="log.id" class="hover:bg-slate-900/30 transition-colors group">
-                                <td class="p-4 font-mono text-[10px] text-slate-500 whitespace-nowrap flex items-center gap-1.5">
-                                    <component :is="Clock" class="w-3 h-3 text-slate-600" />
+                        <tbody class="divide-y divide-slate-800/60 text-xs text-tertiary">
+                            <tr v-for="log in filteredLogs" :key="log.id" class="hover:bg-card transition-colors group">
+                                <td class="p-4 font-mono text-[10px] text-muted-light whitespace-nowrap flex items-center gap-1.5">
+                                    <component :is="Clock" class="w-3 h-3 text-placeholder" />
                                     {{ log.timestamp }}
                                 </td>
-                                <td class="p-4 font-medium text-white text-[10px] flex items-center gap-1.5">
-                                    <component :is="User" class="w-3 h-3 text-slate-500 flex-shrink-0" />
+                                <td class="p-4 font-medium text-primary text-[10px] flex items-center gap-1.5">
+                                    <component :is="User" class="w-3 h-3 text-muted-light flex-shrink-0" />
                                     {{ log.user }}
                                 </td>
-                                <td class="p-4 text-slate-300 text-[10px]">{{ log.action }}</td>
+                                <td class="p-4 text-tertiary text-[10px]">{{ log.action }}</td>
                                 <td class="p-4">
-                                    <span class="bg-slate-900 text-slate-400 px-2.5 py-1 rounded-full text-[9px] font-mono whitespace-nowrap border border-slate-800/60 flex items-center gap-1">
+                                    <span class="bg-secondary text-muted px-2.5 py-1 rounded-full text-[9px] font-mono whitespace-nowrap border border-light flex items-center gap-1">
                                         <component :is="Activity" class="w-2.5 h-2.5" />
                                         {{ log.module }}
                                     </span>
                                 </td>
-                                <td class="p-4 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
-                                    <component :is="Globe" class="w-3 h-3 text-slate-600" />
+                                <td class="p-4 font-mono text-[10px] text-muted-light flex items-center gap-1.5">
+                                    <component :is="Globe" class="w-3 h-3 text-placeholder" />
                                     {{ log.ipAddress }}
                                 </td>
                                 <td class="p-4 text-center">
@@ -229,17 +229,17 @@ const filteredLogs = computed(() => {
             </div>
 
             <!-- Footer -->
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-slate-900/20 border border-slate-800/80 rounded-2xl p-4">
-                <div class="flex items-center gap-2 text-[10px] font-mono text-slate-500">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-card-light border border-card rounded-2xl p-4">
+                <div class="flex items-center gap-2 text-[10px] font-mono text-muted-light">
                     <component :is="Lock" class="w-3.5 h-3.5 text-emerald-400" />
                     <span>Logs are immutable and cryptographically signed</span>
-                    <span class="text-slate-600">|</span>
+                    <span class="text-placeholder">|</span>
                     <span class="flex items-center gap-1">
                         <component :is="Database" class="w-3 h-3" />
                         {{ auditLogs.length }} records
                     </span>
                 </div>
-                <div class="flex items-center gap-3 text-[9px] font-mono text-slate-500">
+                <div class="flex items-center gap-3 text-[9px] font-mono text-muted-light">
                     <span class="flex items-center gap-1">
                         <component :is="CheckCircle" class="w-2.5 h-2.5 text-emerald-400" />
                         {{ stats.success }} success

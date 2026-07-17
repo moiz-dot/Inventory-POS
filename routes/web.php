@@ -67,4 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/dashboard/finance', fn() => Inertia::render('Dashboard/Finance'))->name('dashboard.finance');
     Route::get('/dashboard/audit-logs', fn() => Inertia::render('Dashboard/AuditLogs'))->name('dashboard.audit-logs');
     Route::get('/dashboard/users', fn() => Inertia::render('Dashboard/Users'))->name('dashboard.users');
+
+    // User Preferences
+    Route::put('/user/theme', [App\Http\Controllers\UserPreferenceController::class, 'updateTheme'])->name('theme.update');
 });

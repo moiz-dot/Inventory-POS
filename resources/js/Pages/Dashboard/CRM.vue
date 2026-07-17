@@ -85,11 +85,11 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
                 <div>
                     <div class="flex items-center gap-2">
                         <component :is="Users" class="w-5 h-5 text-blue-400" />
-                        <h2 class="text-xl font-bold text-white tracking-tight">Customer Relationship Management (CRM)</h2>
+                        <h2 class="text-xl font-bold text-primary tracking-tight">Customer Relationship Management (CRM)</h2>
                     </div>
-                    <p class="text-xs text-slate-500 font-mono mt-0.5">Roster directories and loyalty tier promotions</p>
+                    <p class="text-xs text-muted-light font-mono mt-0.5">Roster directories and loyalty tier promotions</p>
                 </div>
-                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-white font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs text-primary font-semibold flex items-center gap-1.5 transition-colors shadow-lg shadow-blue-600/20">
                     <component :is="UserPlus" class="w-4 h-4" />
                     Add Customer
                 </button>
@@ -97,46 +97,46 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
 
             <!-- Quick Stats -->
             <div class="grid grid-cols-3 gap-4">
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="Users" class="w-4 h-4 text-blue-400" />
-                        <span class="text-lg font-bold text-white">{{ totalCustomers }}</span>
+                        <span class="text-lg font-bold text-primary">{{ totalCustomers }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Total Customers</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Total Customers</p>
                 </div>
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="Crown" class="w-4 h-4 text-purple-400" />
-                        <span class="text-lg font-bold text-white">{{ vipCount }}</span>
+                        <span class="text-lg font-bold text-primary">{{ vipCount }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">VIP Members</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">VIP Members</p>
                 </div>
-                <div class="bg-slate-900/20 border border-slate-800/80 p-4 rounded-xl text-center">
+                <div class="bg-card-light border border-card p-4 rounded-xl text-center">
                     <div class="flex items-center justify-center gap-1.5">
                         <component :is="DollarSign" class="w-4 h-4 text-emerald-400" />
-                        <span class="text-lg font-bold text-white">${{ totalSpent.toLocaleString() }}</span>
+                        <span class="text-lg font-bold text-primary">${{ totalSpent.toLocaleString() }}</span>
                     </div>
-                    <p class="text-[9px] font-mono text-slate-500 uppercase">Total Revenue</p>
+                    <p class="text-[9px] font-mono text-muted-light uppercase">Total Revenue</p>
                 </div>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-8 items-start">
                 <!-- Left Column - SMS Blast -->
-                <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl space-y-4">
+                <div class="lg:col-span-5 bg-card-hover border border-card p-6 rounded-2xl space-y-4">
                     <div class="flex items-center gap-2">
                         <component :is="MessageCircle" class="w-4 h-4 text-blue-400" />
-                        <h3 class="text-xs font-semibold text-slate-400 font-mono uppercase">Loyalty Promo Blast</h3>
+                        <h3 class="text-xs font-semibold text-muted font-mono uppercase">Loyalty Promo Blast</h3>
                     </div>
 
                     <form @submit="sendSms" class="space-y-4">
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-mono text-slate-500 uppercase flex items-center gap-1.5">
+                            <label class="text-[10px] font-mono text-muted-light uppercase flex items-center gap-1.5">
                                 <component :is="Tag" class="w-3 h-3" />
                                 Target Loyalty Tier
                             </label>
                             <select 
                                 v-model="smsTier" 
-                                class="w-full bg-slate-950 border border-slate-800/80 focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-slate-200 outline-none transition-all"
+                                class="w-full bg-primary border border-card focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-secondary outline-none transition-all"
                             >
                                 <option value="VIP">VIP Tier Customers (15% promo)</option>
                                 <option value="Regular">Regular Tier Customers (Standard)</option>
@@ -145,23 +145,23 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
                         </div>
 
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-mono text-slate-500 uppercase flex items-center gap-1.5">
+                            <label class="text-[10px] font-mono text-muted-light uppercase flex items-center gap-1.5">
                                 <component :is="Mail" class="w-3 h-3" />
                                 Campaign Message Payload
                             </label>
                             <textarea 
                                 v-model="smsMsg" 
                                 rows="4" 
-                                class="w-full bg-slate-950 border border-slate-800/80 focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-white resize-none outline-none transition-all placeholder:text-slate-500"
+                                class="w-full bg-primary border border-card focus:border-blue-500/40 rounded-lg p-2.5 text-xs text-primary resize-none outline-none transition-all placeholder:text-muted-light"
                                 placeholder="Enter your campaign message..."
                             ></textarea>
-                            <div class="flex justify-between text-[8px] font-mono text-slate-500">
+                            <div class="flex justify-between text-[8px] font-mono text-muted-light">
                                 <span>Characters: {{ smsMsg.length }}</span>
                                 <span>Max: 1600</span>
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
+                        <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-xs text-primary font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20">
                             <component :is="Send" class="w-3.5 h-3.5" />
                             Dispatch SMS Campaign
                         </button>
@@ -174,11 +174,11 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
                     </div>
 
                     <!-- Tier Info -->
-                    <div class="bg-slate-950/50 border border-slate-800/60 rounded-lg p-3 text-[9px] font-mono text-slate-400">
+                    <div class="bg-card-50 border border-light rounded-lg p-3 text-[9px] font-mono text-muted">
                         <div class="flex items-center gap-2">
                             <component :is="Zap" class="w-3 h-3 text-amber-400" />
-                            <span class="text-slate-500">Estimated recipients:</span>
-                            <span class="text-white font-bold">
+                            <span class="text-muted-light">Estimated recipients:</span>
+                            <span class="text-primary font-bold">
                                 {{ customers.filter(c => c.tier === smsTier).length }} customers
                             </span>
                         </div>
@@ -186,26 +186,26 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
                 </div>
 
                 <!-- Right Column - Customers List -->
-                <div class="lg:col-span-7 bg-slate-900/20 border border-slate-800/80 rounded-2xl p-6 space-y-4">
+                <div class="lg:col-span-7 bg-card-light border border-card rounded-2xl p-6 space-y-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <component :is="Users" class="w-4 h-4 text-emerald-400" />
-                            <h3 class="text-xs font-semibold text-slate-300 font-mono">Client Loyalty Accounts</h3>
+                            <h3 class="text-xs font-semibold text-tertiary font-mono">Client Loyalty Accounts</h3>
                         </div>
-                        <span class="text-[8px] font-mono text-slate-500">{{ customers.length }} active</span>
+                        <span class="text-[8px] font-mono text-muted-light">{{ customers.length }} active</span>
                     </div>
 
                     <div class="space-y-2">
-                        <div v-for="c in customers" :key="c.id" class="group bg-slate-950 border border-slate-800/80 p-4 rounded-xl hover:border-slate-700/80 hover:bg-slate-900/30 transition-all">
+                        <div v-for="c in customers" :key="c.id" class="group bg-primary border border-card p-4 rounded-xl hover:border-card hover:bg-card transition-all">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-start gap-3">
                                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center flex-shrink-0" :class="getTierColor(c.tier)">
-                                        <component :is="getTierIcon(c.tier)" class="w-4 h-4 text-white" />
+                                        <component :is="getTierIcon(c.tier)" class="w-4 h-4 text-primary" />
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-white text-xs group-hover:text-blue-200 transition-colors">{{ c.name }}</h4>
+                                        <h4 class="font-semibold text-primary text-xs group-hover:text-blue-200 transition-colors">{{ c.name }}</h4>
                                         <div class="flex items-center gap-2 mt-0.5">
-                                            <span class="text-[10px] font-mono text-slate-500 flex items-center gap-1">
+                                            <span class="text-[10px] font-mono text-muted-light flex items-center gap-1">
                                                 <component :is="Award" class="w-2.5 h-2.5" />
                                                 Tier:
                                             </span>
@@ -216,26 +216,26 @@ const vipCount = customers.value.filter(c => c.tier === 'VIP').length;
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[10px] text-slate-500 block flex items-center justify-end gap-1">
+                                    <span class="text-[10px] text-muted-light block flex items-center justify-end gap-1">
                                         <component :is="DollarSign" class="w-2.5 h-2.5" />
                                         Total Spent
                                     </span>
-                                    <span class="font-mono text-slate-200 font-bold">${{ c.totalSpent.toLocaleString() }}</span>
+                                    <span class="font-mono text-secondary font-bold">${{ c.totalSpent.toLocaleString() }}</span>
                                 </div>
                             </div>
                             <!-- Hover actions -->
-                            <div class="mt-2 pt-2 border-t border-slate-800/60 flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="mt-2 pt-2 border-t border-light flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button class="text-[8px] font-mono text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
                                     <component :is="Mail" class="w-2.5 h-2.5" />
                                     Email
                                 </button>
-                                <span class="text-slate-600">|</span>
-                                <button class="text-[8px] font-mono text-slate-500 hover:text-white transition-colors flex items-center gap-1">
+                                <span class="text-placeholder">|</span>
+                                <button class="text-[8px] font-mono text-muted-light hover:text-primary transition-colors flex items-center gap-1">
                                     <component :is="Eye" class="w-2.5 h-2.5" />
                                     View History
                                 </button>
-                                <span class="text-slate-600">|</span>
-                                <button class="text-[8px] font-mono text-slate-500 hover:text-white transition-colors flex items-center gap-1">
+                                <span class="text-placeholder">|</span>
+                                <button class="text-[8px] font-mono text-muted-light hover:text-primary transition-colors flex items-center gap-1">
                                     <component :is="Edit" class="w-2.5 h-2.5" />
                                     Edit
                                 </button>
